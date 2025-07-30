@@ -1,0 +1,157 @@
+%
+% 6.006 problem set 3 solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros-sp20}
+\newcommand{\theproblemsetnum}{3}
+
+\title{6.006 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{July 11,2025}
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Zunmi
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% See below for common and useful latex constructs. %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Some useful commands:
+%$f(x) = \Theta(x)$
+%$T(x, y) \leq \log(x) + 2^y + \binom{2n}{n}$
+% {\tt code\_function}
+
+
+% You can create unnumbered lists as follows:
+%\begin{itemize}
+%    \item First item in a list
+%        \begin{itemize}
+%            \item First item in a list
+%                \begin{itemize}
+%                    \item First item in a list
+%                    \item Second item in a list
+%                \end{itemize}
+%            \item Second item in a list
+%        \end{itemize}
+%    \item Second item in a list
+%\end{itemize}
+
+% You can create numbered lists as follows:
+%\begin{enumerate}
+%    \item First item in a list
+%    \item Second item in a list
+%    \item Third item in a list
+%\end{enumerate}
+
+% You can write aligned equations as follows:
+%\begin{align}
+%    \begin{split}
+%        (x+y)^3 &= (x+y)^2(x+y) \\
+%                &= (x^2+2xy+y^2)(x+y) \\
+%                &= (x^3+2x^2y+xy^2) + (x^2y+2xy^2+y^3) \\
+%                &= x^3+3x^2y+3xy^2+y^3
+%    \end{split}
+%\end{align}
+
+% You can create grids/matrices as follows:
+%\begin{align}
+%    A =
+%    \begin{bmatrix}
+%        A_{11} & A_{21} \\
+%        A_{21} & A_{22}
+%    \end{bmatrix}
+%\end{align}
+
+% You can include images and PDFs as follows:
+% \includegraphics[width=0.5\textwidth]{img.jpg}
+
+\begin{problems}
+
+\problem  % Problem 1
+
+
+\begin{problemparts}
+\problempart % Problem 1a
+\begin{verbatim}
+    0:[36,92]
+    1:
+    2:
+    3:
+    4:[56]
+    5:[47,61,33]
+    6:[52]
+\end{verbatim}
+\problempart % Problem 1b
+$c = 13$
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 2
+
+\begin{problemparts}
+\problempart % Problem 2a
+guarantee:$k_1 = 1,k_2 = n+1$
+\problempart % Problem 2b
+guarantee:choose $k_1,k_2$small enough so that $k_in//u = 0$
+\problempart % Problem 2c
+the highest probability is $\frac{1}{n}$
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 3
+
+\begin{problemparts}
+\problempart % Problem 3a
+word can be upper bounded by $128^{16logn * 8}< n^{33}$,so radix sort. 
+\problempart % Problem 3b
+direct access array of size $10^{5}$
+\problempart % Problem 3c
+Multiplying by $n^3$,so they are m in $[0,4n^3]$,using radix sort.
+\problempart % Problem 3d
+merge sort using only comparisons,so $O(nlogn)$.
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 4
+
+\begin{problemparts}
+\problempart % Problem 4a
+build a hash table H,insert $b_i$ into H mapped to i,for every $b_i$
+,check if $r-b_i$exists in H in expected O(1) time,then check whether it is close.
+\problempart % Problem 4b
+Replace each $b_i$,with tuple $(b_i,i)$,scan the B and remove all $(b_i,i)$ that $b_i > r$,
+then use redix sort to an array A.\par
+use two-pointer algorithm,initialize $i=0,j=|A|-1$,\par
+if A[i][0] + A[j][0] < r,then $i++$;\par
+if A[i][0] + A[j][0] > r,then $j--$;\par
+if A[i][0] + A[j][0] = r,then return True.
+\end{problemparts}
+
+\newpage
+
+\problem  % Problem 5
+
+\begin{problemparts}
+\problempart % Problem 5a
+
+\problempart % Problem 5b
+\problempart code in .python file
+\end{problemparts}
+
+\end{problems}
+
+\end{document}

@@ -1,0 +1,176 @@
+%
+% 6.006 problem set 4 solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros-sp20}
+\newcommand{\theproblemsetnum}{4}
+
+\title{6.006 Problem Set \theproblemsetnum}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{June 9,2025}
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Zunmi
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% See below for common and useful latex constructs. %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Some useful commands:
+%$f(x) = \Theta(x)$
+%$T(x, y) \leq \log(x) + 2^y + \binom{2n}{n}$
+% {\tt code\_function}
+
+
+% You can create unnumbered lists as follows:
+%\begin{itemize}
+%    \item First item in a list
+%        \begin{itemize}
+%            \item First item in a list
+%                \begin{itemize}
+%                    \item First item in a list
+%                    \item Second item in a list
+%                \end{itemize}
+%            \item Second item in a list
+%        \end{itemize}
+%    \item Second item in a list
+%\end{itemize}
+
+% You can create numbered lists as follows:
+%\begin{enumerate}
+%    \item First item in a list
+%    \item Second item in a list
+%    \item Third item in a list
+%\end{enumerate}
+
+% You can write aligned equations as follows:
+%\begin{align}
+%    \begin{split}
+%        (x+y)^3 &= (x+y)^2(x+y) \\
+%                &= (x^2+2xy+y^2)(x+y) \\
+%                &= (x^3+2x^2y+xy^2) + (x^2y+2xy^2+y^3) \\
+%                &= x^3+3x^2y+3xy^2+y^3
+%    \end{split}
+%\end{align}
+
+% You can create grids/matrices as follows:
+%\begin{align}
+%    A =
+%    \begin{bmatrix}
+%        A_{11} & A_{21} \\
+%        A_{21} & A_{22}
+%    \end{bmatrix}
+%\end{align}
+
+% You can include images and PDFs as follows:
+% \includegraphics[width=0.5\textwidth]{img.jpg}
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+\problempart % Problem 1a
+16(skew=2),37(skew=-2)
+\problempart % Problem 1b
+\includegraphics[width=0.5\textwidth]{ps4-1-b.jpg}
+\problempart % Problem 1c
+\includegraphics[width=0.5\textwidth]{ps4-1-c.jpg}
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+
+\begin{problemparts}
+\problempart % Problem 2a
+Min-heap
+\problempart % Problem 2b
+Mx-heap
+\problempart % Problem 2c
+{[0,2,2,8,9,13]}
+\problempart % Problem 2d
+Min-heap
+\end{problemparts}
+
+\newpage
+\problem  % Problem 3
+
+\begin{problemparts}
+\problempart % Problem 3a
+Build a max-heap from A keyed on $s_i$,mapping to $r_i$,
+then use $delete\_max$ k times to extract the k largest elements.
+\problempart % Problem 3b
+\begin{verbatim}
+    greaters = []
+    def greater_than_x(A,i=0, x):
+        assert len(A) > 0
+        while i < len(A):
+            if A[i] <= x:
+                greater_than_x(A, (i+1)//2, x)
+            else:
+                greaters.append(A[i])
+                greater_than_x(A, 2*i+1, x)
+                greater_than_x(A, 2*i+2, x)
+        return greaters
+
+\end{verbatim}
+
+\end{problemparts}
+
+\newpage
+\problem  % Problem 4
+1. Priority Queue P on the solar farms(a Max-Heap), storing for each solar farm its address $s_i$, capacity $c_i$,
+and its available capacity $a_i$ (initially $a_i = c_i$), keyed on available capacity;\par
+2. Set data structure B(Hash-Table) mapping each building’s name $b_j$ to the address of the solarpowered building’s name $bj$ to the address of the solar
+farm $s_i$ that it is connected to and its demand $d_j$;\par
+3. Set data structure F(Hash-Table) mapping the address of each solar farm $s_i$ to: (1) its own Set data struc-
+ture $B_i$(Hash-Table) containing the buildings associated with that farm, and (2) a pointer to the location of
+$s_i$ in P .\par
+the operations:\par
+initialize(S): build Set data structures P and then F from S, and initialize B as empty. \par
+power\_on($b_j,d_j$):  First, find a solor farm to connect by deleting a solar farm si from P
+having largest available capacity ci (delete\_max) and checking whether it’s capacity is at
+least $d_j$ . There are two cases:\par
+a. $d_j > c_i$, so reinsert the solar farm back into P (relinking a pointr from F to a location
+in P ) and return that no solar farm can currently support the building.\par
+b. $d_j <= c_i$, so subtract $d_j$ from $c_i$ and reinsert it back into P (relinking a pointer). Then,
+add $b_j$ to B mapping to $s_i$, and then find the $B_i$ in F associated with $s_i$ and add$b_j$ to $B_i$.
+\par
+power off($b_j$): Lookup the $s_i$ and $d_j$ associated with $b_j$ in B, lookup $B_i$ in F using $s_i$, and
+remove $b_j$ from $B_i$. Lastly, go to $s_i$’s location in P and remove $s_i$ from P , increase $c_i$ by
+$d_j$,and reinsert $s_i$ into P. \par
+customers($s_i$): lookup $B_i$ in F using $s_i$, and return all names stored in $B_i$. \par
+
+\newpage
+\problem  % Problem 5
+Store the matrices in a Sequence AVL tree T,where every node is augmented with the following information:\par
+1. the size of the subtree of node;\par
+2. the ordered product of all matrices in the subtree rooted of node;\par
+operations:\par
+initialize($M$): build the AVL tree T from M\par
+update\_joint(k,M):find the kth node v in T,replace the v.matrix with M, and update the ordered product of all matrices in the subtree rooted at v.\par
+full\_transformation(): return the ordered product of root in T.\par
+\newpage
+\problem  % Problem 6
+\begin{problemparts}
+\problempart % Problem 6a
+find tne maximum 
+\problempart % Problem 6b
+\problempart % Problem 6c
+\problempart Submit your implementation to {\small\url{alg.mit.edu}}.
+\end{problemparts}
+
+\end{problems}
+
+\end{document}

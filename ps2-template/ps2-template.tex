@@ -1,0 +1,142 @@
+%
+% 6.006 problem set 2 solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros-sp20}
+\newcommand{\theproblemsetnum}{2}
+
+\title{6.006 Problem Set 2}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}{July 4,2025}
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} Zunmi
+
+\medskip
+
+{\bf Collaborators:} None
+
+\medskip\hrulefill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% See below for common and useful latex constructs. %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Some useful commands:
+%$f(x) = \Theta(x)$
+%$T(x, y) \leq \log(x) + 2^y + \binom{2n}{n}$
+% {\tt code\_function}
+
+
+% You can create unnumbered lists as follows:
+%\begin{itemize}
+%    \item First item in a list
+%        \begin{itemize}
+%            \item First item in a list
+%                \begin{itemize}
+%                    \item First item in a list
+%                    \item Second item in a list
+%                \end{itemize}
+%            \item Second item in a list
+%        \end{itemize}
+%    \item Second item in a list
+%\end{itemize}
+
+% You can create numbered lists as follows:
+%\begin{enumerate}
+%    \item First item in a list
+%    \item Second item in a list
+%    \item Third item in a list
+%\end{enumerate}
+
+% You can write aligned equations as follows:
+%\begin{align}
+%    \begin{split}
+%        (x+y)^3 &= (x+y)^2(x+y) \\
+%                &= (x^2+2xy+y^2)(x+y) \\
+%                &= (x^3+2x^2y+xy^2) + (x^2y+2xy^2+y^3) \\
+%                &= x^3+3x^2y+3xy^2+y^3
+%    \end{split}
+%\end{align}
+
+% You can create grids/matrices as follows:
+%\begin{align}
+%    A =
+%    \begin{bmatrix}
+%        A_{11} & A_{21} \\
+%        A_{21} & A_{22}
+%    \end{bmatrix}
+%\end{align}
+
+% You can include images and PDFs as follows:
+% \includegraphics[width=0.5\textwidth]{img.jpg}
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+\problempart % Problem 1a
+$O(n^2)$
+\problempart % Problem 1b
+$O(n^4)$,$\Omega(n^{2lg3})$
+\problempart % Problem 1c
+$\Theta(n{log^2}n)$
+\problempart % Problem 1d
+$\Theta(n^2)$
+\end{problemparts}
+
+\newpage
+\problem  % Problem 2
+
+\begin{problemparts}
+\problempart % Problem 2a
+selection sort,cause its fewer $set$ operiations($O(n)$)
+\problempart % Problem 2b
+merge sort, cause it has fewer $compare$ operiations($O(nlogn)$)
+\problempart % Problem 2c
+insertion sort,cause it decrease a inversions each inner loop iteration.So its
+$O(n+k)$
+\end{problemparts}
+
+\newpage
+\problem  % Problem 3
+tell card to teleport to $2^i$ and $n-2^i$,until Datum is found or have not been
+passed,then $j=i$,which means $2^{j-1}<k<2^j$,then do binary search in the
+$[2^{j-1},2^j]$ range.All above take $O(j)$ time. 
+\newpage
+\problem  % Problem 4
+\begin{verbatim}
+  1.doubly linked list L containing all undeleted messages in order.
+  2.a sorted array V containing the pair (v_i,p_i),where v_i is the ID and
+  p_i is the pointer to a linked list L_v of a sequence of pointers p_v to
+  the ordered messages with ID v_i. 
+
+  build(V):L in O(1) time, V in O(nlogn) time.
+
+  send(v,m):insert m into a node x at the front of L in O(1).find v
+  in V in O(logn) time,then insert p_v pointing to x at the end of L_v in O(1).
+
+  recent(k): traverse the first k nodes of L in O(k) time.
+
+  ban(v):find v in V in O(logn) time,then for each pointer p_v in L_v,
+  delete the node pointed by p_v in L in O(1) time,set p_v point to None.
+
+\end{verbatim}
+\newpage
+\problem  % Problem 5
+
+\begin{problemparts}
+\problempart % Problem 5a
+\problempart % Problem 5b
+\problempart code in .python file
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
